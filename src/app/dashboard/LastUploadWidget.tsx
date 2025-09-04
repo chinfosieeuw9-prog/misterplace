@@ -1,5 +1,6 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useEffect, useState } from "react";
 import { supabase } from "../../utils/supabaseClient";
 
 export default function LastUploadWidget() {
@@ -8,7 +9,7 @@ export default function LastUploadWidget() {
   useEffect(() => {
   const interval: NodeJS.Timeout = setInterval(fetchLastFile, 10000);
     async function fetchLastFile() {
-      const { data, error } = await supabase.storage.from("files").list();
+  const { data, error } = await supabase.storage.from("files").list();
       if (!error && data && data.length > 0) {
         // Sorteer op datum, indien beschikbaar
         const sorted = [...data].sort((a, b) => {

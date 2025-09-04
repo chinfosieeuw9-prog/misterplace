@@ -13,7 +13,7 @@ export default function MyFileWidget() {
     const file = input?.files?.[0];
     if (file) {
       setUploading(true);
-      const { error } = await supabase.storage.from("files").upload(file.name, file);
+  const { error } = await supabase.storage.from("files").upload(file.name, file);
       if (!error) {
         const { data } = supabase.storage.from("files").getPublicUrl(file.name);
         setFileUrl(data?.publicUrl || "");
