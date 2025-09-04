@@ -7,8 +7,8 @@ export default function AccountPage() {
   const [errors, setErrors] = useState({ username: "", email: "", password: "" });
 
   function validate() {
-    let valid = true;
-    let newErrors = { username: "", email: "", password: "" };
+  let valid = true;
+  const newErrors = { username: "", email: "", password: "" };
     // Gebruikersnaam: minimaal 3 tekens, alleen letters/cijfers
     if (!form.username || form.username.length < 3 || /[^a-zA-Z0-9]/.test(form.username)) {
       newErrors.username = "Minimaal 3 tekens, alleen letters/cijfers.";
