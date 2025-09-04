@@ -57,14 +57,25 @@ export default function AuthPage() {
             required
           />
           {(view !== 'forgot') && (
-            <input
-              type="password"
-              placeholder="Wachtwoord"
-              value={password}
-              onChange={e => setPassword(e.target.value)}
-              className="w-full p-2 mb-4 border rounded"
-              required
-            />
+            <>
+              <input
+                type="password"
+                placeholder="Wachtwoord"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+                className="w-full p-2 mb-2 border rounded"
+                required
+              />
+              {view === 'login' && (
+                <button
+                  type="button"
+                  className="text-blue-600 hover:underline text-sm mb-4"
+                  onClick={() => setView('forgot')}
+                >
+                  Wachtwoord vergeten?
+                </button>
+              )}
+            </>
           )}
           {error && <div className="text-red-500 mb-2">{error}</div>}
           <button
