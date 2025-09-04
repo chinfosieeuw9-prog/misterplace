@@ -6,7 +6,7 @@ export default function LastUploadWidget() {
   const [lastFile, setLastFile] = useState<{ name: string; created_at?: string; size?: number } | null>(null);
 
   useEffect(() => {
-    let interval: NodeJS.Timeout;
+  let interval: NodeJS.Timeout;
     async function fetchLastFile() {
       const { data, error } = await supabase.storage.from("files").list();
       if (!error && data && data.length > 0) {
@@ -67,7 +67,7 @@ export default function LastUploadWidget() {
               await supabase.storage.from("files").upload(file.name, file);
             }
           }}>
-            <input type="file" name="file" className="text-xs max-w-[110px]" />
+            <input type="file" name="file" className="text-xs max-w-[110px]" placeholder="Kies bestand" />
             <button type="submit" className="bg-blue-600 text-white text-xs px-2 py-1 rounded max-w-[70px]">Upload</button>
           </form>
         </>
@@ -82,7 +82,7 @@ export default function LastUploadWidget() {
               await supabase.storage.from("files").upload(file.name, file);
             }
           }}>
-            <input type="file" name="file" className="text-xs max-w-[110px]" />
+            <input type="file" name="file" className="text-xs max-w-[110px]" placeholder="Kies bestand" />
             <button type="submit" className="bg-blue-600 text-white text-xs px-2 py-1 rounded max-w-[70px]">Upload</button>
           </form>
         </>

@@ -18,8 +18,12 @@ export default function SharePage() {
       if (error) throw error;
       const url = supabase.storage.from('files').getPublicUrl(file.name).data.publicUrl;
       setDownloadUrl(url);
-    } catch (err: any) {
-      setError(err.message);
+  } catch (err: unknown) {
+      if (typeof err === 'object' && err !== null && 'message' in err) {
+        setError((err as { message: string }).message);
+      } else {
+        setError('Onbekende fout');
+      }
     }
     setUploading(false);
   }
@@ -29,6 +33,7 @@ export default function SharePage() {
       <h1 className="text-3xl font-bold mb-6">Bestand delen</h1>
       <form onSubmit={handleUpload} className="w-full max-w-md">
         <input
+          placeholder="Voer waarde in"
           type="file"
           onChange={e => setFile(e.target.files?.[0] || null)}
           className="mb-4 w-full"
