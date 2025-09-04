@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import QRCode from "qrcode.react";
+import { QRCodeCanvas } from "qrcode.react";
 
 export default function RemoteSupportPage() {
   const [teamViewerId, setTeamViewerId] = useState("");
@@ -31,7 +31,7 @@ export default function RemoteSupportPage() {
         <div className="flex flex-col items-center gap-2 mt-2">
           <span className="text-xs text-gray-400">TeamViewer Link:</span>
           <a href={supportLink} className="text-blue-400 underline text-xs" target="_blank" rel="noopener">{supportLink}</a>
-          <QRCode value={supportLink} size={128} />
+          <QRCodeCanvas value={supportLink} size={128} />
         </div>
       )}
       <div className="mt-4 text-xs text-gray-500">
