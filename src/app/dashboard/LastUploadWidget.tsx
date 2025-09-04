@@ -6,7 +6,7 @@ export default function LastUploadWidget() {
   const [lastFile, setLastFile] = useState<{ name: string; created_at?: string; size?: number } | null>(null);
 
   useEffect(() => {
-  let interval: NodeJS.Timeout;
+  const interval: NodeJS.Timeout = setInterval(fetchLastFile, 10000);
     async function fetchLastFile() {
       const { data, error } = await supabase.storage.from("files").list();
       if (!error && data && data.length > 0) {
@@ -22,8 +22,8 @@ export default function LastUploadWidget() {
       }
     }
     fetchLastFile();
-    interval = setInterval(fetchLastFile, 10000);
-    return () => clearInterval(interval);
+  // interval is now a const, so no reassignment
+  return () => clearInterval(interval);
   }, []);
 
   // Functies buiten useEffect plaatsen
