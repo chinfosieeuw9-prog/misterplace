@@ -1,103 +1,86 @@
-import Image from "next/image";
+"use client";
+import Link from 'next/link';
+import Image from 'next/image';
+import React from 'react';
 
-export default function Home() {
+function Clock() {
+  const [time, setTime] = React.useState(new Date());
+  React.useEffect(() => {
+    const timer = setInterval(() => setTime(new Date()), 1000);
+    return () => clearInterval(timer);
+  }, []);
+  return <span className="font-mono text-xs">{time.toLocaleTimeString()}</span>;
+}
+
+export default function HomePage() {
+  // Dummy nieuws, later API integratie
+  const nieuws = [
+    {
+      bron: "Tweakers",
+      titel: "Nieuwe iPhone 15 Pro aangekondigd",
+      url: "https://tweakers.net/nieuws/",
+      img: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=48&q=80"
+    },
+    {
+      bron: "Androidworld",
+      titel: "Android 14 update nu beschikbaar",
+      url: "https://androidworld.nl/nieuws/",
+      img: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=48&q=80"
+    },
+    {
+      bron: "Hardware Info",
+      titel: "Nvidia RTX 5090 benchmarks gelekt",
+      url: "https://nl.hardware.info/nieuws/",
+      img: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=48&q=80"
+    },
+    {
+      bron: "Microsoft",
+      titel: "Windows 12 preview nu te testen",
+      url: "https://blogs.windows.com/",
+      img: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=48&q=80"
+    },
+    {
+      bron: "iCulture",
+      titel: "iOS 19: dit zijn de nieuwe functies",
+      url: "https://www.iculture.nl/nieuws/",
+      img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=48&q=80"
+    },
+  ];
+  const categorieen = [
+    { naam: "Tweakers", kleur: "bg-blue-800" },
+    { naam: "Androidworld", kleur: "bg-green-700" },
+    { naam: "Hardware Info", kleur: "bg-yellow-700" },
+    { naam: "Microsoft", kleur: "bg-blue-500" },
+    { naam: "iCulture", kleur: "bg-pink-600" }
+  ];
+
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white flex flex-col items-center justify-start">
+      <header className="mb-8 w-full max-w-4xl flex justify-between items-center px-4">
+        <div className="dashboard-header-container">
+          <div className="dashboard-header text-2xl font-bold">Homepage</div>
+          <div className="dashboard-header-gloss" />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        <div className="ml-auto"><Clock /></div>
+      </header>
+  <Link href="/login" className="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-6 rounded mb-8">Inloggen</Link>
+      <h2 className="text-xl font-semibold mb-6 text-center w-full">Laatste nieuws per categorie</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl mb-10">
+        {categorieen.map((cat) => (
+          <div key={cat.naam} className={`rounded-xl p-4 ${cat.kleur}`}> 
+            <h3 className="font-bold mb-2 text-lg">{cat.naam}</h3>
+            {nieuws.filter((n) => n.bron === cat.naam).map((n) => (
+              <a key={n.titel} href={n.url} target="_blank" rel="noopener" className="flex items-center gap-3 mb-2 hover:bg-gray-800 rounded p-2">
+                <Image src={n.img} alt={n.titel} width={48} height={48} className="rounded" />
+                <span>{n.titel}</span>
+              </a>
+            ))}
+          </div>
+        ))}
+      </div>
+      {/* Extra widgets/secties kunnen hier toegevoegd worden */}
     </div>
   );
 }
+
+

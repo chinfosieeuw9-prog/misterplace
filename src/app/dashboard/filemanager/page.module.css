@@ -1,0 +1,6 @@
+/* Afbeelding preview styling */
+.preview-img {
+  max-width: 100%;
+  max-height: 70vh;
+  border-radius: 8px;
+}
