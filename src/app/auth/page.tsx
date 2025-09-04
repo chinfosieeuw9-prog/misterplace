@@ -77,6 +77,15 @@ export default function AuthPage() {
         </form>
         <div className="mt-4 flex flex-col gap-2 text-sm">
           <div className="flex justify-between">
+            {view === 'login' && (
+              <button
+                type="button"
+                className="text-blue-500 hover:underline text-left"
+                onClick={() => setView('forgot')}
+              >
+                Wachtwoord vergeten?
+              </button>
+            )}
             {view !== 'login' && (
               <button className="text-blue-600" onClick={() => setView('login')}>Inloggen</button>
             )}
