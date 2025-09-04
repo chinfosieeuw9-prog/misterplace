@@ -14,7 +14,7 @@ export default function SharePage() {
     setUploading(true);
     setError('');
     try {
-      const { data, error } = await supabase.storage.from('files').upload(file.name, file);
+    const { error } = await supabase.storage.from('files').upload(file.name, file);
       if (error) throw error;
       const url = supabase.storage.from('files').getPublicUrl(file.name).data.publicUrl;
       setDownloadUrl(url);

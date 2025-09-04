@@ -13,7 +13,7 @@ const CLIENT_ID = "YOUR_GOOGLE_CLIENT_ID"; // Vervang door je eigen client ID
 const REDIRECT_URI = typeof window !== "undefined" ? window.location.origin + "/dashboard/upload" : "";
 
 export default function GoogleDriveWidget({ options = {} }: { options?: WidgetOptions }) {
-  const [token, setToken] = useState<string>("");
+  const [token] = useState<string>("");
 
   function login() {
     window.location.href =

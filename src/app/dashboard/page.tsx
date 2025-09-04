@@ -8,19 +8,12 @@ import FavoriteLinksWidget from "./FavoriteLinksWidget";
 import NetworkMonitorWidget from "./NetworkMonitorWidget";
 import NotesWidget from "./NotesWidget";
 import TickerBar from "./TickerBar";
-import UploadForm from "./UploadForm";
-import MyFileWidget from "./MyFileWidget";
 import StorageUsageWidget from "./StorageUsageWidget";
 import ConversionWidget from "./ConversionWidget";
 import SessionWidget from "./SessionWidget";
 import LastUploadWidget from "./LastUploadWidget";
-import SpeedTestWidget from "../dashboard/SpeedTestWidget";
-import WifiInfoWidget from "../dashboard/WifiInfoWidget";
 import LanInfoWidget from "../dashboard/LanInfoWidget";
-import SystemInfoWidget from "./SystemInfoWidget";
 import AgendaWidget from "./AgendaWidget";
-import CloudWidget from "./CloudWidget";
-import OnlineStatusWidget from "./OnlineStatusWidget";
 import FavoritesWidget from "./FavoritesWidget";
 import ChatWidget from "./ChatWidget";
 import SystemStatusWidget from "./SystemStatusWidget";
@@ -30,8 +23,6 @@ import { DragDropContext, Droppable, Draggable, DropResult } from '@hello-pangea
 const initialWidgets = [
   { id: 'radio', component: <RadioWidget /> },
   { id: 'lan', component: <LanInfoWidget /> },
-  { id: 'wifi', component: <WifiInfoWidget /> },
-  { id: 'speed', component: <SpeedTestWidget /> },
   { id: 'news', component: <NewsWidget /> },
   { id: 'favlinks', component: <FavoriteLinksWidget /> },
   { id: 'network', component: <NetworkMonitorWidget /> },
