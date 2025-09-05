@@ -89,38 +89,40 @@ export default function AuthPage() {
             {loading ? 'Bezig...' : view === 'login' ? 'Inloggen' : view === 'register' ? 'Registreren' : 'Reset link sturen'}
           </button>
         </form>
-        <div className="mt-4 flex flex-col gap-2 text-sm">
-          <div className="flex justify-between">
-            {view === 'login' && (
-              <button
-                type="button"
-                className="text-blue-500 hover:underline text-left"
-                onClick={() => setView('forgot')}
-              >
-                Wachtwoord vergeten?
-              </button>
-            )}
-            {view !== 'login' && (
-              <button className="text-blue-600" onClick={() => setView('login')}>Inloggen</button>
-            )}
-            {view !== 'register' && (
-              <button className="text-blue-600" onClick={() => setView('register')}>Account maken</button>
-            )}
-          </div>
-          <div className="flex justify-between">
-            {view !== 'forgot' && (
-              <button className="text-blue-600" onClick={() => setView('forgot')}>Wachtwoord vergeten?</button>
-            )}
-            <button className="text-blue-600" onClick={() => {
-              const newPin = window.prompt('Nieuwe pincode instellen (minimaal 4 cijfers):');
-              if (newPin && /^\d{4,6}$/.test(newPin)) {
-                alert('Pincode reset link verstuurd (dummy)!');
-              } else if (newPin) {
-                alert('Ongeldige pincode. Minimaal 4 cijfers.');
-              }
-            }}>Pincode vergeten?</button>
-          </div>
-        </div>
+            <div className="mt-4 flex flex-col gap-2 text-sm">
+              {view === 'login' && (
+                <>
+                  <button
+                    type="button"
+                    className="bg-yellow-300 text-black font-bold px-3 py-1 rounded shadow hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 transition-all duration-150 mb-2"
+                    onClick={() => setView('forgot')}
+                  >
+                    Wachtwoord vergeten?
+                  </button>
+                  <button
+                    type="button"
+                    className="bg-green-500 text-white font-bold px-3 py-1 rounded shadow hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-all duration-150 mb-2"
+                    onClick={() => setView('register')}
+                  >
+                    Account maken
+                  </button>
+                </>
+              )}
+              {view !== 'login' && (
+                <button className="text-blue-600" onClick={() => setView('login')}>Inloggen</button>
+              )}
+              {view !== 'forgot' && view !== 'login' && (
+                <button className="text-blue-600" onClick={() => setView('forgot')}>Wachtwoord vergeten?</button>
+              )}
+              <button className="text-blue-600" onClick={() => {
+                const newPin = window.prompt('Nieuwe pincode instellen (minimaal 4 cijfers):');
+                if (newPin && /^\d{4,6}$/.test(newPin)) {
+                  alert('Pincode reset link verstuurd (dummy)!');
+                } else if (newPin) {
+                  alert('Ongeldige pincode. Minimaal 4 cijfers.');
+                }
+              }}>Pincode vergeten?</button>
+            </div>
       </div>
     </div>
   );
