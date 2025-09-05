@@ -67,13 +67,16 @@ export default function AuthPage() {
                 required
               />
               {view === 'login' && (
-                <button
-                  type="button"
-                  className="text-blue-600 hover:underline text-sm mb-4"
-                  onClick={() => setView('forgot')}
-                >
-                  Wachtwoord vergeten?
-                </button>
+                <div className="flex justify-end mb-4">
+                  <button
+                    type="button"
+                    className="bg-yellow-300 text-black font-bold px-3 py-1 rounded shadow hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 transition-all duration-150"
+                    style={{marginTop: '2px'}}
+                    onClick={() => setView('forgot')}
+                  >
+                    Wachtwoord vergeten?
+                  </button>
+                </div>
               )}
             </>
           )}
