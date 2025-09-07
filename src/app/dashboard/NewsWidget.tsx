@@ -1,21 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+
 
 export default function NewsWidget() {
-  // ...existing code...
-    // Hardcoded nieuws-headlines
-    const news = [
-      { title: "AEX sluit hoger na sterke dag tech-aandelen", url: "https://www.example.com/aex" },
-      { title: "Kabinet presenteert nieuwe begroting", url: "https://www.example.com/begroting" },
-      { title: "Weerbericht: zonnig en warm weekend verwacht", url: "https://www.example.com/weer" },
-      { title: "Voetbal: Ajax wint met ruime cijfers", url: "https://www.example.com/ajax" },
-      { title: "Economie groeit sneller dan verwacht", url: "https://www.example.com/economie" }
-    ];
-    return (
-      <div className="bg-gray-900 rounded-xl p-6 shadow flex flex-col gap-2">
-        <span className="font-bold mb-2">Nieuws</span>
-        {news.map((n, i) => (
-          <a key={i} href={n.url} target="_blank" rel="noopener" className="text-xs text-blue-400 hover:underline mb-1">{n.title}</a>
-        ))}
-      </div>
-    );
+  const [news, setNews] = useState<{title: string, link: string}[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    fetch("https://api.rss2json.com/v1/api.json?rss_url=https://feeds.nos.nl/nosnieuwsalgemeen")
+      .then(res => res.json())
+      .then(data => {
+        if (data.items) {
+          setNews(data.items.slice(0, 5).map((item: any) => ({ title: item.title, link: item.link })));
+        } else {
+          setError("Geen nieuws gevonden.");
+        }
+        setLoading(false);
+      })
+      .catch(() => {
+        setError("Fout bij ophalen nieuws.");
+        setLoading(false);
+      });
+  }, []);
+
+  return (
+    <div className="bg-gray-900 rounded-xl p-6 shadow flex flex-col gap-2 widget-uniform">
+      <span className="font-bold mb-2">Nieuws</span>
+      {loading && <div className="text-xs text-gray-400">Laden...</div>}
+      {error && <div className="text-xs text-red-400">{error}</div>}
+      {!loading && !error && (
+        <ul className="text-xs text-gray-400">
+          {news.map((n, i) => (
+            <li key={i} className="mb-1">
+              <a href={n.link} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">{n.title}</a>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
 }

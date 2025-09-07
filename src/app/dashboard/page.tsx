@@ -7,6 +7,7 @@ import NewsWidget from "./NewsWidget";
 import FavoriteLinksWidget from "./FavoriteLinksWidget";
 import NetworkMonitorWidget from "./NetworkMonitorWidget";
 import WifiInfoWidget from "./WifiInfoWidget";
+import OnlinePingTraceWidget from "./OnlinePingTraceWidget";
 import NotesWidget from "./NotesWidget";
 import TickerBar from "./TickerBar";
 import StorageUsageWidget from "./StorageUsageWidget";
@@ -30,7 +31,7 @@ const initialWidgets = [
   { id: 'wifi', component: <WifiInfoWidget /> },
   { id: 'notes', component: <NotesWidget /> },
   { id: 'teamviewer', component: <TeamViewerWidget /> },
-  // Voeg hier andere widgets toe
+  { id: 'pingtrace', component: <OnlinePingTraceWidget /> }
 ];
 
 export default function DashboardPage() {

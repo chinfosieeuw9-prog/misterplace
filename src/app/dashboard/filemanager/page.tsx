@@ -27,7 +27,7 @@ const FileManagerPage: React.FC = () => {
   // Dynamische API-URL helper
   function getApiUrl(path: string) {
     // Gebruik window.location.hostname en poort, standaard 5000 als niet op localhost
-    if (typeof window === "undefined") return `http://localhost:5000${path}`;
+  // Niet beschikbaar in online omgeving
     const { hostname } = window.location;
     let port = window.location.port;
     // Als frontend op 3000/3001 draait, gebruik backend op 5000
@@ -139,7 +139,7 @@ const FileManagerPage: React.FC = () => {
               <iframe src={previewFile!} className="w-full h-[70vh] bg-white rounded" title="PDF preview"></iframe>
             )}
             {previewType === 'image' && previewFile && (
-              <img src={`http://localhost:5000/uploads/${activeFolder}/${previewFile}`} alt="Preview" className="preview-img" />
+              <div className="text-xs text-gray-400">Preview niet beschikbaar in online omgeving.</div>
             )}
             {previewType === 'text' && (
               <pre className="bg-gray-900 text-white p-4 rounded w-full h-[70vh] overflow-auto">{previewFile}</pre>
@@ -222,15 +222,15 @@ const FileManagerPage: React.FC = () => {
               <li key={file.name} className="flex items-center py-2 px-2 hover:bg-gray-700 cursor-pointer text-sm" onClick={() => handlePreview(file.name)}>
                 <span className="mr-2 text-lg">{file.name.endsWith('.pdf') ? '📄' : file.name.match(/\.(png|jpg|jpeg|gif|webp)$/i) ? '�️' : '📦'}</span>
                 <span className="flex-1 truncate text-white">{file.name}</span>
-                <a href={`http://localhost:5000${file.path}`} className="bg-green-600 text-xs px-1 py-0.5 rounded mx-1" download>⬇</a>
+                <span className="text-xs text-gray-400">Download niet beschikbaar online.</span>
                 <button className="bg-red-600 text-xs px-1 py-0.5 rounded mx-1" onClick={async e => {
                   e.stopPropagation();
-                  await fetch("http://localhost:5000/api/delete", {
+                  // Niet beschikbaar in online omgeving
                     method: "DELETE",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ folder: activeFolder, name: file.name })
                   });
-                  fetch(`http://localhost:5000/api/files?folder=${activeFolder}`)
+                  // Niet beschikbaar in online omgeving
                     .then(r => r.json())
                     .then(setFiles);
                 }}>🗑️</button>
@@ -238,7 +238,7 @@ const FileManagerPage: React.FC = () => {
                 <button className="bg-gray-600 text-xs px-1 py-0.5 rounded mx-1" onClick={async e => {
                   e.stopPropagation();
                   // Unieke downloadlink genereren
-                  const downloadUrl = `http://localhost:5000/api/download?folder=${activeFolder}&name=${encodeURIComponent(file.name)}`;
+                  // Niet beschikbaar in online omgeving
                   navigator.clipboard.writeText(downloadUrl);
                   setCopiedUrl(downloadUrl);
                   setShowQR(downloadUrl);

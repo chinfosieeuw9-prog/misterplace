@@ -9,12 +9,7 @@ const LanInfoWidget: React.FC = () => {
   const [pingHost, setPingHost] = useState<string>("");
   const [pingResult, setPingResult] = useState<string>("");
   const [pingFullOutput, setPingFullOutput] = useState<string>("");
-  const [pingLoading, setPingLoading] = useState(false);
-  const [traceResult, setTraceResult] = useState<string>("");
-  const [traceFullOutput, setTraceFullOutput] = useState<string>("");
-  const [traceLoading, setTraceLoading] = useState(false);
-  const [showPingFull, setShowPingFull] = useState(false);
-  const [showTraceFull, setShowTraceFull] = useState(false);
+  // Oude ping/traceroute functionaliteit verwijderd. Gebruik de OnlinePingTraceWidget.
 
   // Wis pingResult na 15 minuten automatisch
   useEffect(() => {
@@ -61,25 +56,7 @@ const LanInfoWidget: React.FC = () => {
     setPingLoading(false);
   }
 
-  async function handleTraceroute() {
-    if (!pingHost) return;
-    setTraceLoading(true);
-    setTraceResult("");
-    setTraceFullOutput("");
-    try {
-      const res = await fetch(`http://localhost:5000/api/traceroute?host=${encodeURIComponent(pingHost)}`);
-      const data = await res.json();
-      if (data.error) {
-        setTraceResult(`Fout: ${data.error}`);
-      } else {
-        setTraceResult(`Traceroute naar ${data.host}`);
-        setTraceFullOutput(data.output);
-      }
-    } catch {
-      setTraceResult("Fout bij ophalen traceroute resultaat");
-    }
-    setTraceLoading(false);
-  }
+  // Oude ping/traceroute functionaliteit verwijderd. Gebruik de OnlinePingTraceWidget.
 
   return (
     <div className="bg-gray-900 rounded-xl p-6 shadow flex flex-col gap-2 widget-uniform">
@@ -91,42 +68,7 @@ const LanInfoWidget: React.FC = () => {
       {status === "Offline" && <span className="text-red-400 text-xs mt-2">Je bent offline!</span>}
       <div className="mt-4">
         <span className="font-bold mb-2 block">Ping / Traceroute</span>
-        <input
-          type="text"
-          value={pingHost}
-          onChange={e => setPingHost(e.target.value)}
-          className="bg-gray-800 text-white px-2 py-1 rounded w-full mb-2"
-          placeholder="ping www.nu.nl"
-        />
-        <button
-          className="bg-blue-600 text-white text-xs px-2 py-1 rounded mr-2"
-          onClick={handlePing}
-          disabled={pingLoading || !pingHost}
-        >Ping</button>
-        <button
-          className="bg-green-600 text-white text-xs px-2 py-1 rounded mr-2"
-          onClick={handleTraceroute}
-          disabled={traceLoading || !pingHost}
-        >Traceroute</button>
-        {(pingLoading || traceLoading) && <span className="text-xs text-gray-400 ml-2">Bezig...</span>}
-        {pingResult && (
-          <>
-            <pre className="ping-output bg-gray-800 text-white p-4 rounded mt-2 whitespace-pre-wrap">{pingResult}</pre>
-            <button className="bg-gray-700 text-white text-xs px-2 py-1 rounded mt-2" onClick={() => setShowPingFull(v => !v)}>{showPingFull ? "Verberg volledige output" : "Toon volledige output"}</button>
-            {showPingFull && (
-              <pre className="ping-output bg-gray-900 text-white p-4 rounded mt-2 whitespace-pre-wrap">{pingFullOutput}</pre>
-            )}
-          </>
-        )}
-        {traceResult && (
-          <>
-            <pre className="bg-gray-800 text-white p-2 rounded mt-2 text-xs whitespace-pre-wrap">{traceResult}</pre>
-            <button className="bg-gray-700 text-white text-xs px-2 py-1 rounded mt-2" onClick={() => setShowTraceFull(v => !v)}>{showTraceFull ? "Verberg volledige output" : "Toon volledige output"}</button>
-            {showTraceFull && (
-              <pre className="bg-gray-900 text-white p-2 rounded mt-2 text-xs whitespace-pre-wrap">{traceFullOutput}</pre>
-            )}
-          </>
-        )}
+        <div className="text-xs text-gray-400 mb-2">Gebruik de widget "Online Ping & Traceroute" voor deze functionaliteit.</div>
       </div>
     </div>
   );

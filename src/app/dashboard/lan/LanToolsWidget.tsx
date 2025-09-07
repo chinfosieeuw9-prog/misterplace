@@ -53,30 +53,32 @@ const LanToolsWidget: React.FC = () => {
   function handlePing() {
     if (!target) return;
     setPingResult('Bezig...');
-    fetch(`http://localhost:5000/api/ping?host=${encodeURIComponent(target)}`)
-      .then(res => res.json())
-      .then(data => {
-        if (data.error) {
-          setPingResult(`Fout: ${data.error}`);
-        } else {
-          setPingResult(data.output);
-        }
-      })
-      .catch(() => setPingResult('Fout bij ophalen ping resultaat'));
+    // fetch(`http://localhost:5000/api/ping?host=${encodeURIComponent(target)}`)
+    //   .then(res => res.json())
+    //   .then(data => {
+    //     if (data.error) {
+    //       setPingResult(`Fout: ${data.error}`);
+    //     } else {
+    //       setPingResult(data.output);
+    //     }
+    //   })
+    //   .catch(() => setPingResult('Fout bij ophalen ping resultaat'));
+    setPingResult('Niet beschikbaar in online omgeving. Gebruik de Online Ping & Traceroute widget.');
   }
   function handleTraceroute() {
     if (!target) return;
     setTracerouteResult('Bezig...');
-    fetch(`http://localhost:5000/api/traceroute?host=${encodeURIComponent(target)}`)
-      .then(res => res.json())
-      .then(data => {
-        if (data.error) {
-          setTracerouteResult(`Fout: ${data.error}`);
-        } else {
-          setTracerouteResult(data.output);
-        }
-      })
-      .catch(() => setTracerouteResult('Fout bij ophalen traceroute resultaat'));
+    // fetch(`http://localhost:5000/api/traceroute?host=${encodeURIComponent(target)}`)
+    //   .then(res => res.json())
+    //   .then(data => {
+    //     if (data.error) {
+    //       setTracerouteResult(`Fout: ${data.error}`);
+    //     } else {
+    //       setTracerouteResult(data.output);
+    //     }
+    //   })
+    //   .catch(() => setTracerouteResult('Fout bij ophalen traceroute resultaat'));
+    setTracerouteResult('Niet beschikbaar in online omgeving. Gebruik de Online Ping & Traceroute widget.');
   }
   function handleWakeOnLan() {
     setWolResult(`Wake-on-LAN verzonden naar ${wolTarget} (mock)`);

@@ -9,13 +9,9 @@ export default function NetworkMonitorWidget() {
   const [status, setStatus] = useState('Onbekend');
 
   useEffect(() => {
-    // Haal SSID en IP op via WifiInfoWidget API
-    fetch('http://localhost:5000/api/wifi')
-      .then(res => res.json())
-      .then(data => {
-        setSsid(data.ssid || 'Onbekend');
-        setStatus(typeof navigator !== "undefined" && navigator.onLine ? "Verbonden" : "Offline");
-      });
+  // Wifi-informatie niet beschikbaar in online omgeving
+  setSsid('Niet beschikbaar online');
+  setStatus(typeof navigator !== "undefined" && navigator.onLine ? "Verbonden" : "Offline");
     fetch('https://api.ipify.org?format=json')
       .then(res => res.json())
       .then(data => setIp(data.ip));

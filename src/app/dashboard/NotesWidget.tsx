@@ -1,9 +1,21 @@
 import React, { useState } from "react";
 
+
 const NotesWidget: React.FC = () => {
   const [notes, setNotes] = useState<string[]>([]);
   const [input, setInput] = useState("");
   const [showPopup, setShowPopup] = useState(false);
+
+  // Load notes from localStorage on mount
+  React.useEffect(() => {
+    const saved = localStorage.getItem("notes-widget");
+    if (saved) setNotes(JSON.parse(saved));
+  }, []);
+
+  // Save notes to localStorage when changed
+  React.useEffect(() => {
+    localStorage.setItem("notes-widget", JSON.stringify(notes));
+  }, [notes]);
 
   function addNote() {
     if (input.trim()) {

@@ -1,6 +1,5 @@
 
-import React from "react";
-import { useState } from "react";
+import React, { useState, useRef } from "react";
 import NetworkMonitorWidget from "./NetworkMonitorWidget";
 
 const defaultStations = [
@@ -9,12 +8,16 @@ const defaultStations = [
   { name: "Qmusic", url: "https://icecast-qmusic.cdp.triple-it.nl/Qmusic_nl_live_96.mp3" },
 ];
 
+
 export default function RadioWidget() {
   const [stations, setStations] = useState(defaultStations);
   const [current, setCurrent] = useState<string | null>(null);
   const [name, setName] = useState("");
   const [url, setUrl] = useState("");
   const [showNetwork, setShowNetwork] = useState(false);
+  const [audioError, setAudioError] = useState<string | null>(null);
+  const [autoplayBlocked, setAutoplayBlocked] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   function addStation() {
     if (!name.trim() || !url.trim()) return;
@@ -26,6 +29,21 @@ export default function RadioWidget() {
   function removeStation(idx: number) {
     setStations(stations.filter((_, i) => i !== idx));
   }
+
+  // Try to play audio when current changes
+  React.useEffect(() => {
+    if (current && audioRef.current) {
+      setAudioError(null);
+      setAutoplayBlocked(false);
+      audioRef.current.play().catch((err) => {
+        if (err.name === "NotAllowedError") {
+          setAutoplayBlocked(true);
+        } else {
+          setAudioError("Kan de stream niet afspelen. Mogelijk geblokkeerd door browser of CORS.");
+        }
+      });
+    }
+  }, [current]);
 
   return (
     <div className="bg-gray-900 rounded-xl p-6 shadow flex flex-col gap-2">
@@ -53,7 +71,22 @@ export default function RadioWidget() {
             </div>
           ))}
           {current && (
-            <audio src={current} controls autoPlay className="mt-4 w-full" />
+            <>
+              <audio
+                ref={audioRef}
+                src={current}
+                controls
+                autoPlay
+                className="mt-4 w-full"
+                onError={() => setAudioError("Kan de stream niet afspelen. Mogelijk geblokkeerd door browser of CORS.")}
+              />
+              {autoplayBlocked && (
+                <div className="text-xs text-yellow-400 mt-2">Autoplay is geblokkeerd door je browser. Druk op play om te starten.</div>
+              )}
+              {audioError && (
+                <div className="text-xs text-red-400 mt-2">{audioError}</div>
+              )}
+            </>
           )}
         </>
       )}
