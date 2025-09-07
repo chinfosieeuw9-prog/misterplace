@@ -1,3 +1,4 @@
+// Kleine wijziging voor commit - GitHub Copilot
 "use client";
 import React from "react";
 
