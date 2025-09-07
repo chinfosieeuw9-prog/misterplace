@@ -1,3 +1,4 @@
+// Kleine wijziging voor commit - 7 september 2025
 // Kleine wijziging voor commit - GitHub Copilot
 "use client";
 import React from "react";
