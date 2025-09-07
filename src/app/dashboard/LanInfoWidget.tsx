@@ -6,18 +6,18 @@ const LanInfoWidget: React.FC = () => {
   // ...existing code...
   const [publicIp, setPublicIp] = useState<string>("");
   const [copied, setCopied] = useState(false);
-  const [pingHost, setPingHost] = useState<string>("");
-  const [pingResult, setPingResult] = useState<string>("");
-  const [pingFullOutput, setPingFullOutput] = useState<string>("");
+  // const [pingHost, setPingHost] = useState<string>("");
+  // const [pingResult, setPingResult] = useState<string>("");
+  // const [pingFullOutput, setPingFullOutput] = useState<string>("");
   // Oude ping/traceroute functionaliteit verwijderd. Gebruik de OnlinePingTraceWidget.
 
   // Wis pingResult na 15 minuten automatisch
-  useEffect(() => {
-    if (pingResult) {
-      const timer = setTimeout(() => setPingResult("") , 15 * 60 * 1000);
-      return () => clearTimeout(timer);
-    }
-  }, [pingResult]);
+  // useEffect(() => {
+  //   if (pingResult) {
+  //     const timer = setTimeout(() => setPingResult("") , 15 * 60 * 1000);
+  //     return () => clearTimeout(timer);
+  //   }
+  // }, [pingResult]);
 
   useEffect(() => {
     fetch("https://api.ipify.org?format=json")
@@ -36,25 +36,7 @@ const LanInfoWidget: React.FC = () => {
   }, []);
   const details = `Computernaam: ${deviceName}\nPubliek IP: ${publicIp}\nStatus: ${status}`;
 
-  async function handlePing() {
-    if (!pingHost) return;
-    setPingLoading(true);
-    setPingResult("");
-    setPingFullOutput("");
-    try {
-      const res = await fetch(`http://localhost:5000/api/ping?host=${encodeURIComponent(pingHost)}`);
-      const data = await res.json();
-      if (data.error) {
-        setPingResult(`Fout: ${data.error}`);
-      } else {
-  setPingResult(data.output);
-  setPingFullOutput(data.output);
-      }
-    } catch {
-      setPingResult("Fout bij ophalen ping resultaat");
-    }
-    setPingLoading(false);
-  }
+  // Oude ping functionaliteit verwijderd. Gebruik de OnlinePingTraceWidget.
 
   // Oude ping/traceroute functionaliteit verwijderd. Gebruik de OnlinePingTraceWidget.
 
@@ -68,7 +50,7 @@ const LanInfoWidget: React.FC = () => {
       {status === "Offline" && <span className="text-red-400 text-xs mt-2">Je bent offline!</span>}
       <div className="mt-4">
         <span className="font-bold mb-2 block">Ping / Traceroute</span>
-        <div className="text-xs text-gray-400 mb-2">Gebruik de widget "Online Ping & Traceroute" voor deze functionaliteit.</div>
+  <div className="text-xs text-gray-400 mb-2">Gebruik de widget &quot;Online Ping &amp; Traceroute&quot; voor deze functionaliteit.</div>
       </div>
     </div>
   );

@@ -11,7 +11,7 @@ export default function NewsWidget() {
       .then(res => res.json())
       .then(data => {
         if (data.items) {
-          setNews(data.items.slice(0, 5).map((item: any) => ({ title: item.title, link: item.link })));
+          setNews(data.items.slice(0, 5).map((item: { title: string; link: string }) => ({ title: item.title, link: item.link })));
         } else {
           setError("Geen nieuws gevonden.");
         }
