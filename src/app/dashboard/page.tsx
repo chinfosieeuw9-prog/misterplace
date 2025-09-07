@@ -102,12 +102,12 @@ export default function DashboardPage() {
           {/* MyFileWidget verwijderd */}
         </div>
         {/* Netwerk-widgets onder de bestandswidgets */}
-        <div className="flex flex-col md:flex-row gap-6">
+        <div className="w-full">
           <DragDropContext onDragEnd={onDragEnd}>
             <Droppable droppableId="dashboard-widgets" direction="horizontal">
               {(provided) => (
                 <div
-                  className="grid grid-cols-3 gap-6 w-full"
+                  className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 w-full"
                   ref={provided.innerRef}
                   {...provided.droppableProps}
                 >
