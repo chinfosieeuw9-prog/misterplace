@@ -6,6 +6,7 @@ import RadioWidget from "./RadioWidget";
 import NewsWidget from "./NewsWidget";
 import FavoriteLinksWidget from "./FavoriteLinksWidget";
 import NetworkMonitorWidget from "./NetworkMonitorWidget";
+import WifiInfoWidget from "./WifiInfoWidget";
 import NotesWidget from "./NotesWidget";
 import TickerBar from "./TickerBar";
 import StorageUsageWidget from "./StorageUsageWidget";
@@ -26,6 +27,7 @@ const initialWidgets = [
   { id: 'news', component: <NewsWidget /> },
   { id: 'favlinks', component: <FavoriteLinksWidget /> },
   { id: 'network', component: <NetworkMonitorWidget /> },
+  { id: 'wifi', component: <WifiInfoWidget /> },
   { id: 'notes', component: <NotesWidget /> },
   { id: 'teamviewer', component: <TeamViewerWidget /> },
   // Voeg hier andere widgets toe
