@@ -52,7 +52,6 @@ const FileManagerPage: React.FC = () => {
     </div>
   );
 };
-
 export default FileManagerPage;
             <div className="bg-gray-900 min-h-screen p-8">
               <div className="mb-4">
@@ -91,4 +90,6 @@ export default FileManagerPage;
               </div>
               </div>
             );
-          export default FileManagerPage;
+// einde component
+
+export default FileManagerPage;
