@@ -52,7 +52,6 @@ const FileManagerPage: React.FC = () => {
     </div>
   );
 };
-export default FileManagerPage;
             <div className="bg-gray-900 min-h-screen p-8">
               <div className="mb-4">
                 <a href="/dashboard" className="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-600">← Terug naar dashboard</a>
@@ -87,9 +86,7 @@ export default FileManagerPage;
                     ))}
                   </ul>
                 </main>
-              </div>
-              </div>
+
             );
-// einde component
 
 export default FileManagerPage;
