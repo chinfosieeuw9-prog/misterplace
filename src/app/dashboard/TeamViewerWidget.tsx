@@ -1,41 +1,12 @@
 "use client";
-import React, { useState } from "react";
-import { QRCodeCanvas } from "qrcode.react";
+import React from "react";
 
-const TeamViewerWidget: React.FC = () => {
-  const [teamViewerId, setTeamViewerId] = useState("");
-  const [teamViewerPass, setTeamViewerPass] = useState("");
-  const supportLink = teamViewerId ? `teamviewer://${teamViewerId}` : "";
-
+export default function TeamViewerWidget() {
   return (
-    <div className="bg-gray-900 rounded-xl p-6 shadow flex flex-col gap-3 widget-uniform">
-      <span className="font-bold mb-2">TeamViewer Sessie</span>
-      <input
-        type="text"
-        className="px-2 py-1 rounded bg-gray-700 text-white text-xs border-none outline-none mb-2"
-        placeholder="TeamViewer ID"
-        value={teamViewerId}
-        onChange={e => setTeamViewerId(e.target.value)}
-      />
-      <input
-        type="text"
-        className="px-2 py-1 rounded bg-gray-700 text-white text-xs border-none outline-none mb-2"
-        placeholder="Wachtwoord"
-        value={teamViewerPass}
-        onChange={e => setTeamViewerPass(e.target.value)}
-      />
-      {teamViewerId && (
-        <div className="flex flex-col items-center gap-2 mt-2">
-          <span className="text-xs text-gray-400">TeamViewer Link:</span>
-          <a href={supportLink} className="text-blue-400 underline text-xs" target="_blank" rel="noopener">{supportLink}</a>
-          <QRCodeCanvas value={supportLink} size={96} />
-        </div>
-      )}
-      <div className="mt-2 text-xs text-gray-500">
-        Vul je TeamViewer gegevens in en deel ze met je supportmedewerker.
-      </div>
+    <div className="bg-gray-900 rounded-xl p-6 shadow flex flex-col gap-2 widget-uniform">
+      <span className="font-bold mb-2">TeamViewer</span>
+      <a href="https://www.teamviewer.com/nl/download/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline block mb-1">Download TeamViewer</a>
+      <a href="https://community.teamviewer.com/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline block mb-1">TeamViewer Support</a>
     </div>
   );
-};
-
-export default TeamViewerWidget;
+}

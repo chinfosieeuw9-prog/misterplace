@@ -1,3 +1,21 @@
+/* Responsive widgets voor mobiel */
+@media (max-width: 600px) {
+  .widget-uniform, .widget-compact, .widget-round {
+    min-width: 90vw;
+    max-width: 98vw;
+    min-height: 120px;
+    max-height: none;
+    padding: 1rem;
+    font-size: 1rem;
+  }
+  .widget-uniform span, .widget-compact span, .widget-round span {
+    font-size: 1.1rem;
+  }
+  .widget-uniform button, .widget-compact button, .widget-round button {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+  }
+}
 /* Compacte widget voor LastUploadWidget */
 .widget-compact {
   max-width: 240px;

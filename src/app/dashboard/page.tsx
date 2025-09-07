@@ -7,7 +7,7 @@ import NewsWidget from "./NewsWidget";
 import FavoriteLinksWidget from "./FavoriteLinksWidget";
 import NetworkMonitorWidget from "./NetworkMonitorWidget";
 import WifiInfoWidget from "./WifiInfoWidget";
-import OnlinePingTraceWidget from "./OnlinePingTraceWidget";
+import NetworkToolsWidget from "./OnlinePingTraceWidget";
 import NotesWidget from "./NotesWidget";
 import TickerBar from "./TickerBar";
 import StorageUsageWidget from "./StorageUsageWidget";
@@ -20,6 +20,7 @@ import FavoritesWidget from "./FavoritesWidget";
 import ChatWidget from "./ChatWidget";
 import SystemStatusWidget from "./SystemStatusWidget";
 import TeamViewerWidget from "./TeamViewerWidget";
+import RemoteDesktopWidget from "./RemoteDesktopWidget";
 import { DragDropContext, Droppable, Draggable, DropResult } from '@hello-pangea/dnd';
 
 const initialWidgets = [
@@ -31,7 +32,8 @@ const initialWidgets = [
   { id: 'wifi', component: <WifiInfoWidget /> },
   { id: 'notes', component: <NotesWidget /> },
   { id: 'teamviewer', component: <TeamViewerWidget /> },
-  { id: 'pingtrace', component: <OnlinePingTraceWidget /> }
+  { id: 'networktools', component: <NetworkToolsWidget /> },
+  { id: 'remotedesktop', component: <RemoteDesktopWidget /> }
 ];
 
 export default function DashboardPage() {
